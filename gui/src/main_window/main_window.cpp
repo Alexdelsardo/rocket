@@ -13,16 +13,19 @@ main_window::main_window(QWidget *parent): QMainWindow(parent){
 
     custom_theme();
     create_menu();
-    // main layout
+    //main layout
     v_layout = new QVBoxLayout;
     h_layout = new QHBoxLayout;
     central_widget = new QWidget(this);
     central_widget->setLayout(v_layout);
     setCentralWidget(central_widget);
+    
+
     central_widget->setStyleSheet("border: 2px solid white;");
+    //central_widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     //add connector window
-    connector = new connector_window(this);
+    connector = new connector_window(central_widget);
 
     h_layout->addWidget(connector, 0, Qt::AlignTop | Qt::AlignRight );
     v_layout->addLayout(h_layout);

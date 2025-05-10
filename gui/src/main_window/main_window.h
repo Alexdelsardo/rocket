@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QWidget>
+
 class main_window : public QMainWindow{
     Q_OBJECT
     

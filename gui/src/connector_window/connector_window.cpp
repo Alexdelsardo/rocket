@@ -6,44 +6,59 @@
 #include <QSerialPort>
 #include <QWidget>
 #include <QDebug>
+#include <QFrame>
+
+#include <QGroupBox>
+
+#include <QApplication>
+#include <QDialog>
+#include <QComboBox>
+#include <QPushButton>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QGroupBox>
 connector_window::connector_window(QWidget *parent): QWidget(parent){
-    setFixedSize(300, 150);
-    setPalette(parent->palette());
-    setAutoFillBackground(true);
-    
-    label = new QLabel("Collector Widget", this);
+
+    connector_groupbox = new QGroupBox(tr("Connector Window"));
+
     port_selector = new QComboBox;
     baud_selector = new QComboBox;
-    connect_button = new QPushButton("Connect");
+    connect_button = new QPushButton;
+    label_port = new QLabel(tr("Port: "));
+    label_baud = new QLabel(tr("Baud: "));
+    preview_layout = new QGridLayout();
+    // preview_layout->addWidget(label_port, 0, 0);
+    // preview_layout->addWidget(port_selector, 0, 1);
+    // preview_layout->addWidget(label_baud, 1, 0);
+    // preview_layout->addWidget(baud_selector, 1, 1);
+    // preview_layout->addWidget(connect_button, 2, 1, Qt::AlignRight);
+  
 
-    baud_selector->addItems({"9600", "115200", "921600"});
-    port_selector->setFixedWidth(200);  
-    baud_selector->setFixedWidth(200);
-    
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(label);
-    layout->addWidget(port_selector);
-    layout->addWidget(baud_selector);
-    layout->addWidget(connect_button);
-    
-    layout->setAlignment(port_selector, Qt::AlignRight);
-    layout->setAlignment(baud_selector, Qt::AlignRight);
-    layout->setAlignment(connect_button, Qt::AlignRight);   
-    setLayout(layout); 
+    //connector_groupbox->setLayout(preview_layout);
+
     
 
-    populate_ports();
+    baud_selector->addItem(tr("4800"));
+    baud_selector->addItem(tr("9600"));
+    baud_selector->addItem(tr("19200"));
+    baud_selector->addItem(tr("38400"));
+    baud_selector->addItem(tr("57600"));
+    baud_selector->addItem(tr("115200"));
 
-}
-connector_window::~connector_window(){
-
-
-}
-
-void connector_window::populate_ports(){ // will not show ports in wsl, however this is probably due to using wsl on windows :3
     port_selector->clear();
     Q_FOREACH(QSerialPortInfo port, QSerialPortInfo::availablePorts()){
         qDebug() << "serial port: " << QSerialPortInfo::availablePorts().count();
         port_selector->addItem(port.portName());
     }
+
+    label_baud->setBuddy(baud_selector);
+    label_port->setBuddy(port_selector);
+
 }
+
+connector_window::~connector_window(){
+
+
+}
+

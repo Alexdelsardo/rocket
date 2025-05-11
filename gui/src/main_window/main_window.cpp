@@ -19,8 +19,8 @@
 main_window::main_window(QWidget *parent): QMainWindow(parent){
 
 
-    timer = new QTimer(this);
-    timer->start(50); //50 ms
+    // timer = new QTimer(this);
+    // timer->start(50); //50 ms
 
     custom_theme();
     create_menu();

@@ -21,7 +21,7 @@ main_window::main_window(QWidget *parent): QMainWindow(parent){
 
     timer = new QTimer(this);
     timer->start(50); //50 ms
-    
+
     custom_theme();
     create_menu();
     create_connector_window();
@@ -100,7 +100,7 @@ void main_window::create_connector_window(){
 
     port_selector->clear();
     Q_FOREACH(QSerialPortInfo port, QSerialPortInfo::availablePorts()){
-        qDebug() << "serial port: " << QSerialPortInfo::availablePorts().count();
+        qDebug() << "serial port: " <<port.portName();
         port_selector->addItem(port.portName());
     }
 

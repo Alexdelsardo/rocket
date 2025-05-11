@@ -91,12 +91,12 @@ void main_window::create_connector_window(){
 
     
 
+    baud_selector->addItem("1200");
+    baud_selector->addItem("2400");
     baud_selector->addItem("4800");
     baud_selector->addItem("9600");
     baud_selector->addItem("19200");
     baud_selector->addItem("38400");
-    baud_selector->addItem("57600");
-    baud_selector->addItem("115200");
 
     port_selector->clear();
     Q_FOREACH(QSerialPortInfo port, QSerialPortInfo::availablePorts()){

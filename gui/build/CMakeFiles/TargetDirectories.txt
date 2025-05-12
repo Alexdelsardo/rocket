@@ -1,0 +1,5 @@
+/home/alex/Documents/rocket/gui/build/CMakeFiles/GUI.dir
+/home/alex/Documents/rocket/gui/build/CMakeFiles/edit_cache.dir
+/home/alex/Documents/rocket/gui/build/CMakeFiles/rebuild_cache.dir
+/home/alex/Documents/rocket/gui/build/CMakeFiles/GUI_autogen_timestamp_deps.dir
+/home/alex/Documents/rocket/gui/build/CMakeFiles/GUI_autogen.dir

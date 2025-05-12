@@ -1,7 +1,6 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
-#include "connector_window/connector_window.h"
 
 #include <QMainWindow>
 #include <QMenu>
@@ -10,6 +9,11 @@
 #include <QHBoxLayout>
 #include <QWidget>
 #include <QTimer>
+#include <QComboBox>
+#include <QPushButton>
+#include <QLabel>
+#include <QGroupBox>
+#include <QSerialPort>
 
 class main_window : public QMainWindow{
     Q_OBJECT

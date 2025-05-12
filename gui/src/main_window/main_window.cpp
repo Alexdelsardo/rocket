@@ -16,7 +16,9 @@
 #include <QSerialPort>
 #include <QTimer>
 #include <QString>
-
+#include <QComboBox>
+#include <QPushButton>
+#include <QLabel>
 main_window::main_window(QWidget *parent): QMainWindow(parent){
 
 
@@ -101,7 +103,7 @@ void main_window::create_connector_window(){
 
     port_selector->clear();
     port_selector->addItem("-");
-    port_selector->addItem("/dev/ttyS3");
+    port_selector->addItem("/dev/ttyACM0");
     // sudo ln -s /dev/ttyS3 /dev/ttyUSB0   this forwards port
     //  ttyS3 maps to windows COM3
     //  Arduino Uno (COM3)

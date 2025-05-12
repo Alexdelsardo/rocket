@@ -15,6 +15,7 @@
 #include <QLabel>
 #include <QSerialPort>
 #include <QTimer>
+#include <QString>
 
 main_window::main_window(QWidget *parent): QMainWindow(parent){
 
@@ -90,7 +91,7 @@ void main_window::create_connector_window(){
     connector_groupbox->setLayout(preview_layout);
 
     
-
+    baud_selector->addItem("-");
     baud_selector->addItem("1200");
     baud_selector->addItem("2400");
     baud_selector->addItem("4800");
@@ -99,10 +100,17 @@ void main_window::create_connector_window(){
     baud_selector->addItem("38400");
 
     port_selector->clear();
-    Q_FOREACH(QSerialPortInfo port, QSerialPortInfo::availablePorts()){
-        qDebug() << "serial port: " <<port.portName();
-        port_selector->addItem(port.portName());
-    }
+    port_selector->addItem("-");
+    port_selector->addItem("/dev/ttyS3");
+    // sudo ln -s /dev/ttyS3 /dev/ttyUSB0   this forwards port
+    //  ttyS3 maps to windows COM3
+    //  Arduino Uno (COM3)
+    //  Port_#0008.Hub_#0001
+
+    // Q_FOREACH(QSerialPortInfo port, QSerialPortInfo::availablePorts()){
+    //     qDebug() << "serial port: " <<port.portName();
+    //     port_selector->addItem(port.portName());
+    // }
 
     label_baud->setBuddy(baud_selector);
     label_port->setBuddy(port_selector);
@@ -112,7 +120,40 @@ void main_window::create_connector_window(){
 }
 void main_window::try_connection(){
     qDebug() << "working";
-    emit connection_successful();
+    QString baud = baud_selector->currentText();
+    serial = new QSerialPort();
+    QString port = port_selector->currentText();
+    qDebug() << baud;
+    qDebug() << port;
+    serial = new QSerialPort(this);
+    connect(serial, &QSerialPort::readyRead, this, &main_window::read_data);
+    //connect(serial, &QSerialPort::bytesWritten, this, &main_window::handle_bytes_written);
+    serial->setPortName(port);
+    if (baud == "1200") {
+        serial->setBaudRate(QSerialPort::Baud1200);
+    } else if (baud == "2400") {
+        serial->setBaudRate(QSerialPort::Baud2400);
+    } else if (baud == "4800") {
+        serial->setBaudRate(QSerialPort::Baud4800);
+    } else if (baud == "9600") {
+        serial->setBaudRate(QSerialPort::Baud9600);
+    } else if (baud == "19200") {
+        serial->setBaudRate(QSerialPort::Baud19200);
+    } else if (baud == "38400") {
+        serial->setBaudRate(QSerialPort::Baud38400);
+    } else {
+        serial->setBaudRate(QSerialPort::Baud9600); // default case :3
+    }
+    if (serial->open(QIODevice::ReadOnly)){
+        emit connection_successful();
+    }else{
+        qDebug() << "Failed to open serial port:" << serial->errorString();
+    }
+
+   
+}
+void main_window::read_data(){
+
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////                                                           Status Display                              ///////////////////////////////////////////////////////////////

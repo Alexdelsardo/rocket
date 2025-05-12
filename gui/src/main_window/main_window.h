@@ -17,9 +17,14 @@ class main_window : public QMainWindow{
 public:
     main_window(QWidget *parent);
 private slots:
+    //connector window slots
     void try_connection();
+    void read_data();
+    //void handle_bytes_written();
+    //status display slots
     void update_flightcomp_state();
 signals:
+    //connector window signals
     void connection_successful();
 private:
     void create_menu();

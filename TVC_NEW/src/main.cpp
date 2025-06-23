@@ -2,6 +2,8 @@
 #include <Wire.h>
 #include <MPU6050.h>
 #include <Servo.h>
+#include "datalog.h"
+
 
 MPU6050 MPU;
 Servo PitchServo;
@@ -119,6 +121,9 @@ void setup() {
   digitalWrite(parachutePin, LOW);
   Serial.println("Select mode: [f]light  [1]sweep  [2]center YAW  [3]center PITCH");
   lastTime = millis();
+
+  initDataLog();
+
 }
 
 void loop() {
@@ -172,6 +177,9 @@ void loop() {
   pitch = alpha * (pitch + gyroPitchRate * dt) + (1 - alpha) * accPitch;
   yaw   = alpha * (yaw   + gyroYawRate   * dt) + (1 - alpha) * accYaw;
 
+  logFlightData(millis(), pitch, yaw, ax, ay, az);
+
+
   // Launch/Flight State Machine
   float accMag = sqrt(ax * ax + ay * ay + az * az) / 16384.0;
   switch (currentState) {
@@ -210,6 +218,8 @@ void loop() {
   // Parachute
   if (parachuteDeployed && millis() - chuteFireTime > 1000) {
     digitalWrite(parachutePin, LOW);
+
+    closeDataLog();
   }
 
   // PID Flight Control

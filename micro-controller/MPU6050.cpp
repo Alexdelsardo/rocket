@@ -135,17 +135,13 @@ void loop(){
 
 
   delay(50);
-  Serial.println("----------------------");
-  Serial.print("roll (degrees): ");
-  Serial.println(roll);
-
-
-  Serial.print("pitch (degrees): ");
-  Serial.println(pitch);
-
-
-  Serial.print("yaw (degrees): ");
-  Serial.println(yaw);
+  Serial.print("roll:");
+  Serial.print(roll,2);
+  Serial.print(",pitch:");
+  Serial.print(pitch,2);
+  Serial.print(",yaw:");
+  Serial.print(yaw,2);
+  Serial.println("");
 }
 
 

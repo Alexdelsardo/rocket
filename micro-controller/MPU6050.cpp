@@ -53,24 +53,24 @@ void setup(){
 
 
   delay(20);
-  Serial.print("acc error X: ");
-  Serial.println(XaccError);
+  //Serial.print("acc error X: ");
+  //Serial.println(XaccError);
 
 
-  Serial.print("acc error Y: ");
-  Serial.println(YaccError);
+  //Serial.print("acc error Y: ");
+  //Serial.println(YaccError);
 
 
-  Serial.print("gyro error X: ");
-  Serial.println(XgyroError);
+  //Serial.print("gyro error X: ");
+  //Serial.println(XgyroError);
 
 
-  Serial.print("gyro error Y: ");
-  Serial.println(YgyroError);
+  //Serial.print("gyro error Y: ");
+  //Serial.println(YgyroError);
 
 
-  Serial.print("gyro error Z: ");
-  Serial.println(ZgyroError);
+  //Serial.print("gyro error Z: ");
+  //Serial.println(ZgyroError);
 
 
   currentTime = millis();
@@ -141,6 +141,8 @@ void loop(){
   Serial.print(pitch,2);
   Serial.print(",yaw:");
   Serial.print(yaw,2);
+  Serial.print(",time:");
+  Serial.print(currentTime,2);
   Serial.println("");
 }
 
